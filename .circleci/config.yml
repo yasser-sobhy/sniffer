@@ -1,0 +1,44 @@
+version: 2.0
+
+shared: &shared
+  working_directory: ~/sniffer
+  steps:
+    - checkout
+    - run: bundle install --path vendor/bundle
+    - run:
+        name: Run tests
+        command: rake
+
+jobs:
+  "ruby-2.2":
+    <<: *shared
+    docker:
+      - image: circleci/ruby:2.2-node
+
+  "ruby-2.3":
+    <<: *shared
+    docker:
+      - image: circleci/ruby:2.3-node
+
+  "ruby-2.4":
+    <<: *shared
+    docker:
+      - image: circleci/ruby:2.4-node
+
+  "ruby-2.5":
+    <<: *shared
+    docker:
+      - image: circleci/ruby:2.5-node
+
+  "ruby-2.6":
+    <<: *shared
+    docker:
+      - image: circleci/ruby:2.6-node
+
+workflows:
+  version: 2
+  build:
+    jobs:
+      - "ruby-2.2"
+      - "ruby-2.3"
+      - "ruby-2.4"
