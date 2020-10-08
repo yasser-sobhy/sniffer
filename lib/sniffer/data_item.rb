@@ -19,7 +19,7 @@ module Sniffer
 # rubocop:enable
 # Stores http response data
 
-request&.to_h,
+request.try(:to_h),
         response: # frozen_string_literal: true
 # Sniffer data item stores a request info
 # Basic object for request and response objects
@@ -27,7 +27,7 @@ request&.to_h,
 # rubocop:enable
 # Stores http response data
 
-response&.to_h
+response.try(:to_h)
       }
     end
 
@@ -77,7 +77,7 @@ response&.to_h
 # rubocop:enable
 # Stores http response data
 
-body&.to_s,
+body.try(:to_s),
           method: method
         }
       end
@@ -119,7 +119,7 @@ body&.to_s,
 # rubocop:enable
 # Stores http response data
 
-body&.to_s,
+body.try(:to_s),
           timing: timing
         }
       end
